@@ -1,4 +1,5 @@
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const express = require('express');
 const app = express();
 const baseUrl = 'localhost';
@@ -11,9 +12,19 @@ app.set('view engine', 'ejs');
 
 const comments = [
     {
-        id: 1,
+        id: uuidv4(),
         username: 'Andy',
         text: 'wah kamu hebat sekali broh!'
+    },
+    {
+        id: uuidv4(),
+        username: 'Belstong',
+        text: 'anjinkk emangg dia!'
+    },
+    {
+        id: uuidv4(),
+        username: 'Dani',
+        text: 'ini kapan gajian nyaaa?'
     },
 ];
 
@@ -26,14 +37,15 @@ app.get('/comments/create', (req, res) => {
 });
 
 app.post('/comments', (req, res) => {
+    let id = uuidv4();
     const { username, text } = req.body;
-    comments.push({ username, text });
+    comments.push({ id, username, text });
     res.redirect('/comments');
 });
 
 app.get('/comments/:id', (req, res) => {
     const { id } = req.params;
-    const comment = comments.find(c => c.id === parseInt(id));
+    const comment = comments.find(c => c.id === id);
     res.render('comments/show', { comment });
 });
 
