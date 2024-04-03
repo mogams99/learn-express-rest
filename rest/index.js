@@ -49,6 +49,15 @@ app.get('/comments/:id', (req, res) => {
     res.render('comments/show', { comment });
 });
 
+app.patch('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    const newComment = req.body.text;
+    const foundComment = comments.find(c => c.id === id);
+    foundComment.text = newComment;
+    // res.redirect('comments');
+    res.send(`Comment with ID: ${id} was changed!`);
+});
+
 app.get('/order', (req, res) => {
     res.send({
         message: 'GET order response',
