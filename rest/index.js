@@ -12,7 +12,7 @@ app.use(methodOverride('_method'))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-const comments = [
+let comments = [
     {
         id: uuidv4(),
         username: 'Andy',
@@ -62,6 +62,12 @@ app.patch('/comments/:id', (req, res) => {
     const newComment = req.body.text;
     const foundComment = comments.find(c => c.id === id);
     foundComment.text = newComment;
+    res.redirect('/comments');
+});
+
+app.delete('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    comments = comments.filter(c => c.id !== id);
     res.redirect('/comments');
 });
 
