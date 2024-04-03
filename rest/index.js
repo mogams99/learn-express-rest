@@ -14,86 +14,20 @@ const comments = [
         username: 'Andy',
         text: 'wah kamu hebat sekali broh!'
     },
-    {
-        username: 'Bella',
-        text: 'Terima kasih banyak!'
-    },
-    {
-        username: 'Charlie',
-        text: 'Sangat menakjubkan!'
-    },
-    {
-        username: 'David',
-        text: 'Aku bangga padamu!'
-    },
-    {
-        username: 'Eva',
-        text: 'Keren banget!'
-    },
-    {
-        username: 'Frank',
-        text: 'Kerja bagus!'
-    },
-    {
-        username: 'Grace',
-        text: 'Selamat ya!'
-    },
-    {
-        username: 'Henry',
-        text: 'Kamu luar biasa!'
-    },
-    {
-        username: 'Irene',
-        text: 'Aku terinspirasi!'
-    },
-    {
-        username: 'Jack',
-        text: 'Sungguh keren!'
-    },
-    {
-        username: 'Katherine',
-        text: 'Inspiratif sekali!'
-    },
-    {
-        username: 'Leo',
-        text: 'Saya kagum!'
-    },
-    {
-        username: 'Mia',
-        text: 'Bagus sekali!'
-    },
-    {
-        username: 'Nathan',
-        text: 'Keep it up!'
-    },
-    {
-        username: 'Olivia',
-        text: 'Sangat mengesankan!'
-    },
-    {
-        username: 'Peter',
-        text: 'Wow, luar biasa!'
-    },
-    {
-        username: 'Quinn',
-        text: 'Bravo!'
-    },
-    {
-        username: 'Rachel',
-        text: 'Hebat sekali!'
-    },
-    {
-        username: 'Samuel',
-        text: 'Sungguh luar biasa!'
-    },
-    {
-        username: 'Tina',
-        text: 'Saya bangga!'
-    }
 ];
 
 app.get('/comments', (req, res) => {
     res.render('comments/index', { comments });
+});
+
+app.get('/comments/create', (req, res) => {
+    res.render('comments/create');
+});
+
+app.post('/comments', (req, res) => {
+    const { username, text } = req.body;
+    comments.push({ username, text });
+    res.send('Create comment are successfully!');
 });
 
 app.get('/order', (req, res) => {
