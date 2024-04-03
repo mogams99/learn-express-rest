@@ -11,6 +11,7 @@ app.set('view engine', 'ejs');
 
 const comments = [
     {
+        id: 1,
         username: 'Andy',
         text: 'wah kamu hebat sekali broh!'
     },
@@ -28,6 +29,12 @@ app.post('/comments', (req, res) => {
     const { username, text } = req.body;
     comments.push({ username, text });
     res.redirect('/comments');
+});
+
+app.get('/comments/:id', (req, res) => {
+    const { id } = req.params;
+    const comment = comments.find(c => c.id === parseInt(id));
+    res.render('comments/show', { comment });
 });
 
 app.get('/order', (req, res) => {
