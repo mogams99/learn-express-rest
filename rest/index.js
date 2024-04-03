@@ -27,7 +27,7 @@ app.get('/comments/create', (req, res) => {
 app.post('/comments', (req, res) => {
     const { username, text } = req.body;
     comments.push({ username, text });
-    res.send('Create comment are successfully!');
+    res.redirect('/comments');
 });
 
 app.get('/order', (req, res) => {
